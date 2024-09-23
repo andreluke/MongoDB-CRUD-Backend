@@ -1,13 +1,14 @@
+import { configDotenv } from "dotenv";
 import mongoose from "mongoose";
 
+configDotenv()
 
-const uri = "mongodb://localhost:27017/dbatividade3";
+const uri = process.env.DB_URI || 'TESTE';
 
 const db = mongoose;
 
 export function connect() {
     db.connect(uri, {
-        serverSelectionTimeoutMS: 12000,
         maxPoolSize: 10,
     })
     .then(() => console.log("Conectando ao MongoDB"))
